@@ -6,7 +6,8 @@
 #
 # tip_count = total_bill * (tip / 100)
 # bill_with_tip = tip_count + total_bill
-# each_pay_count = round(bill_with_tip / number_of_people, 2)
+# each_pay_count = round(bill_with_ti
+# p / number_of_people, 2)
 #
 # result = f"Each person should pay: ${each_pay_count}"
 #
