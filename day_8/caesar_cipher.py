@@ -35,9 +35,12 @@ def caesar_cipher():
         user_count_input *= -1
 
     for char in user_decode_input:
-        index = alphabet.index(char) + user_count_input
-        index %= len(alphabet)
-        result += alphabet[index]
+        if char not in alphabet:
+            result += char
+        else:
+            index = alphabet.index(char) + user_count_input
+            index %= len(alphabet)
+            result += alphabet[index]
 
 
     print(result)
