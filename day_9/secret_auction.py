@@ -2,8 +2,13 @@
 
 participant_dict = {}
 
+def find_highest_bidder(winner):
+    winner['name'] = max(participant_dict, key=participant_dict.get)
+    winner['bid'] = participant_dict[max(participant_dict, key=participant_dict.get)]
+    print(f'The winner is {winner["name"]} with ${winner["bid"]} bid')
+
 def add_participant():
-    winner = {
+    participant = {
         'bid' : 0,
         'name' : ''
     }
@@ -18,16 +23,6 @@ def add_participant():
         print('\n' * 100)
         add_participant()
     else:
-        # for key in participant_dict:
-        #     if participant_dict[key] > winner['bid']:
-        #         winner['name'] = key
-        #         winner['bid'] = participant_dict[key]
-
-        winner['name'] = max(participant_dict, key=participant_dict.get)
-        winner['bid'] = participant_dict[max(participant_dict, key=participant_dict.get)]
-        print(participant_dict)
-        print(f'The winner is {winner["name"]} with ${winner["bid"]} bid')
-
-
+        find_highest_bidder(participant)
 
 add_participant()
