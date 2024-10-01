@@ -1,4 +1,5 @@
 #TODO 1: Ask the names and bids of participant and push it in the dictionary
+import os
 
 participant_dict = {}
 
@@ -20,7 +21,7 @@ def add_participant():
     add_another_participant = input('Do you want to add another participant? \n').lower()
     # TODO 2: If there are more participant do the process again ELSE loop over the dictionary and display max bid
     if add_another_participant == 'yes':
-        print('\n' * 100)
+        os.system('cls')
         add_participant()
     else:
         find_highest_bidder(participant)
