@@ -19,13 +19,9 @@ while True:
         print(f'Please choose between {menu.get_items()}')
     else:
         coffe_type = menu.find_drink(user_choice)
-        if coffee_maker.is_resource_sufficient(coffe_type):
-            if money_machine.make_payment(coffe_type.cost):
+        if coffee_maker.is_resource_sufficient(coffe_type) and money_machine.make_payment(coffe_type.cost):
                 coffee_maker.make_coffee(coffe_type)
-            else:
-                print('Insufficient Money')
-        else:
-            print('Insufficient Resources')
+        
 
 
 
