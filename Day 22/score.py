@@ -1,6 +1,5 @@
 from turtle import Turtle
 
-
 class Score(Turtle):
     def __init__(self, ):
         super().__init__()
@@ -11,10 +10,7 @@ class Score(Turtle):
         self.color('white')
         self.goto(0, 150)
 
+
     def show_score(self):
         self.clear()
-        self.write(f'Score {self.score_1} - {self.score_2}', align='center', font=("Arial", 25, "normal"))
-
-
-    def hide_score(self):
-        self.clear()
+        self.write(f'{self.score_1}  {self.score_2}', align='center', font=("Arial", 40, "normal"))

@@ -1,6 +1,5 @@
 from turtle import Turtle
 
-
 class Board(Turtle):
     def __init__(self):
         super().__init__()
@@ -11,7 +10,6 @@ class Board(Turtle):
         self.pendown()
         self.setheading(90)
         self.create_line()
-
 
     def create_line(self):
         for _ in range(10):
