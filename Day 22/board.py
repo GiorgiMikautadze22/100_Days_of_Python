@@ -6,7 +6,6 @@ class Board(Turtle):
         super().__init__()
         self.color('white')
         self.hideturtle()
-        self.speed('fastest')
         self.penup()
         self.goto(0, -230)
         self.pendown()
