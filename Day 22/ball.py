@@ -28,7 +28,8 @@ class Ball(Turtle):
         self.goto(0, 0)
 
     def increase_ball_speed(self):
-        if self.ball_speed <= 0:
-            self.ball_speed = 0.001
-        else:
+        if self.ball_speed > 0.005:
             self.ball_speed -= 0.005
+        else:
+            self.ball_speed = 0.005
+
