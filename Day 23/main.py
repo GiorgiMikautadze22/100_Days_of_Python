@@ -11,11 +11,14 @@
 
 from turtle import Screen
 from turtle_cross import TurtleCross
+from car import Car
 
 screen = Screen()
 screen.setup(width=800, height=500)
 screen.title('Cross Road Game')
 screen.tracer(0)
+
+cars = []
 
 tim = TurtleCross(screen)
 
@@ -25,10 +28,21 @@ screen.onkeypress(tim.down, 'Down')
 screen.onkeypress(tim.turn_left, 'Left')
 screen.onkeypress(tim.turn_right, 'Right')
 
-
-
-
+for num in range(30):
+    car = Car(screen)
+    cars.append(car)
 screen.update()
+
+while True:
+
+    for car in cars:
+        car.move_car()
+
+
+    screen.update()
+
+
+# screen.update()
 
 
 
