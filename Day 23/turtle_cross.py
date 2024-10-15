@@ -17,10 +17,6 @@ class TurtleCross(Turtle):
         self.y_cor += 10
         self.goto(self.x_cor,self.y_cor)
         self.setheading(90)
-
-        if self.ycor() > 250:
-            self.refresh()
-
         self.screen.update()
 
 
@@ -46,6 +42,6 @@ class TurtleCross(Turtle):
 
     def refresh(self):
         self.x_cor = 0
-        self.y_cor = -200
+        self.y_cor = -230
         self.setheading(90)
         self.goto(self.x_cor, self.y_cor)
