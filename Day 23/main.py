@@ -9,8 +9,8 @@
 #TODO: When car hits the turtle game over
 #TODO: After turtle crosses the road increase level and speed
 
-from turtle import Screen, Turtle
-from turtle_cross import TurtleCross
+from turtle import Screen
+from player import Player
 from car import Car
 from score_board import ScoreBoard
 
@@ -19,51 +19,35 @@ screen.setup(width=800, height=500)
 screen.title('Cross Road Game')
 screen.tracer(0)
 
+cars = Car()
 score = ScoreBoard()
+player = Player()
 
-cars = []
 game_is_over = True
 
-
-tim = TurtleCross(screen)
-game_over_title = Turtle()
-game_over_title.hideturtle()
-
-
-
 screen.listen()
-screen.onkeypress(tim.up, 'Up')
-screen.onkeypress(tim.down, 'Down')
-screen.onkeypress(tim.turn_left, 'Left')
-screen.onkeypress(tim.turn_right, 'Right')
-
-for num in range(30):
-    car = Car()
-    cars.append(car)
-screen.update()
-
-def increase_speed():
-    for item in cars:
-        item.increase_car_speed()
-
+screen.onkeypress(player.up, 'Up')
+screen.onkeypress(player.down, 'Down')
+screen.onkeypress(player.turn_left, 'Left')
+screen.onkeypress(player.turn_right, 'Right')
 
 while game_is_over:
-
-    if tim.ycor() >= 240:
+    # Checks what to do after player crosses the finish line
+    if player.ycor() >= 240:
         score.increase_score()
-        tim.refresh()
-        screen.update()
-        increase_speed()
+        player.refresh()
+        cars.increase_car_speed()
 
-    for car in cars:
-        car.move_car()
-        if car.distance(tim.xcor() + 20, tim.ycor() + 5) < 20 or car.distance(tim.xcor() - 20, tim.ycor() - 5) < 20:
+    for car in cars.all_cars:
+        cars.move_car(car) # Moves a car forward
+        # Colliding check
+        if car.distance(player.xcor() + 20, player.ycor() + 5) < 20 or car.distance(player.xcor() - 20, player.ycor() - 5) < 20:
             game_is_over = False
             screen.onkeypress(None, 'Up')
             screen.onkeypress(None, 'Down')
             screen.onkeypress(None, 'Left')
             screen.onkeypress(None, 'Right')
-            game_over_title.write('Game Over', align='center', font=("Arial", 45, "normal"))
+            score.game_over()
 
     screen.update()
 
