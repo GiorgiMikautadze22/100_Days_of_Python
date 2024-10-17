@@ -35,19 +35,22 @@ while is_game_on:
         snake.extend()
 
     #NOTE: Statement loosing when touching the walls
-    # if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
-    #     is_game_on = False
-    #     score.game_over()
+    if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
+        # is_game_on = False
+        # score.game_over()
+        score.reset()
+        snake.reset()
 
     #NOTE: Statement of teleporting to the other side of the wall
-    if snake.head.xcor() > 290 or snake.head.xcor() < -290:
-        snake.head.goto(snake.head.xcor() * -1, snake.head.ycor())
-    elif snake.head.ycor() > 290 or snake.head.ycor() < -290:
-        snake.head.goto(snake.head.xcor(), snake.head.ycor() * -1)
+    # if snake.head.xcor() > 290 or snake.head.xcor() < -290:
+    #     snake.head.goto(snake.head.xcor() * -1, snake.head.ycor())
+    # elif snake.head.ycor() > 290 or snake.head.ycor() < -290:
+    #     snake.head.goto(snake.head.xcor(), snake.head.ycor() * -1)
 
+    # Statement for loosing when touching snakes tail
     for seg in snake.segments[1:]:
         if snake.head.distance(seg) < 10:
-            is_game_on = False
-            score.game_over()
+            score.reset()
+            snake.reset()
 
 screen.exitonclick()
