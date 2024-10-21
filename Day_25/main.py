@@ -39,4 +39,3 @@ fur_count_data = pandas.DataFrame(fur_dic)
 print(fur_count_data)
 fur_count_data.to_csv('squirrel_count.csv')
 
-
