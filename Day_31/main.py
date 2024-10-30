@@ -10,11 +10,16 @@ data_dict = data.to_dict(orient='records')
 # for index in range(len(data_dict['French'])):
 #     new_data.append({data_dict["French"][index]:data_dict["English"][index]})
 
-random_word = random.choice(data_dict)
+random_word = ''
 
 def next_card():
-    canvas.itemconfig(language_title, text="French")
-    canvas.itemconfig(word, text=random_word['French'])
+    global random_word
+
+    random_word = random.choice(data_dict)
+    canvas.itemconfig(current_img, image=img_front)
+    canvas.itemconfig(language_title, text="French",fill='black')
+    canvas.itemconfig(word, text=random_word['French'], fill='black')
+    window.after(3000, flip_card)
 
 def flip_card():
     canvas.itemconfig(current_img, image=img_back)
@@ -45,7 +50,5 @@ green_button = Button(image=right_image,highlightthickness=0, command=next_card)
 green_button.grid(row=1, column=1)
 
 next_card()
-
-window.after(2000, flip_card)
 
 window.mainloop()
