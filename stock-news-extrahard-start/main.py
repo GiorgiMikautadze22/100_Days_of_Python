@@ -2,6 +2,7 @@ import os
 import requests
 from dotenv import load_dotenv
 from datetime import datetime
+from twilio.rest import Client
 
 load_dotenv()
 
@@ -30,11 +31,13 @@ def calculate_change(new, old):
     return percentage
 
 change = calculate_change(float(yesterday_data["4. close"]), float(day_after_yesterday_data["4. close"]))
+status_icon = ""
 
 if change < 0:
-    print(f"Decrease {abs(change)}%")
+    # print(f"Decrease {abs(change)}%")
+    status_icon = "🔻"
 elif change > 0:
-    print(f"Increase {abs(change)}%")
+    status_icon = "🔺"
 
 ## STEP 2: Use https://newsapi.org
 # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
@@ -53,12 +56,25 @@ news_params = {
 news_response = requests.get(url=os.getenv("NEWS_API_URL"), params=news_params)
 news_response.raise_for_status()
 news_data = news_response.json()["articles"][0:3]
-print(news_data)
-
 
 ## STEP 3: Use https://www.twilio.com
-# Send a seperate message with the percentage change and each article's title and description to your phone number. 
+# Send a separate message with the percentage change and each article's title and description to your phone number.
 
+body=f"""
+    {STOCK}: {status_icon}{change}%
+    Headline: {news_data[0]["title"]}
+    Brief: {news_data[0]["description"]}
+"""
+
+account_sid = os.getenv("TW_ACCOUNT_ID")
+auth_token = os.getenv("TW_AUTH_TOKEN")
+client = Client(account_sid, auth_token)
+message = client.messages.create(
+  messaging_service_sid=os.getenv("TW_MESSAGE_SERVICE_ID"),
+  body=body,
+  to=os.getenv("MY_PHONE_NUMBER")
+)
+print(message.status)
 
 #Optional: Format the SMS message like this: 
 """
