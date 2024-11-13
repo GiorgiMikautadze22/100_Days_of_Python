@@ -9,7 +9,7 @@ class DataManager:
         headers = {
             "Authorization": "Bearer " + os.getenv("SHEETY_BEARER_TOKEN")
         }
-        response = requests.get(url="https://api.sheety.co/59d0cd834a456796b7c66fb3e08a7d9b/flightDeals/sheet1", headers=headers)
+        response = requests.get(url="https://api.sheety.co/59d0cd834a456796b7c66fb3e08a7d9b/flightDeals/prices", headers=headers)
         data = response.json()["prices"]
         return data
 
@@ -20,9 +20,18 @@ class DataManager:
         params = {
             "prices": row
         }
-        api_url = f"https://api.sheety.co/59d0cd834a456796b7c66fb3e08a7d9b/flightDeals/sheet1/" + str(row["id"])
+        api_url = f"https://api.sheety.co/59d0cd834a456796b7c66fb3e08a7d9b/flightDeals/prices/" + str(row["id"])
         response = requests.put(url=api_url,
                                 headers=headers,
                                 json=params
                                 )
         print(response.text)
+
+    def get_costumer_list(self):
+        headers = {
+            "Authorization": "Bearer " + os.getenv("SHEETY_BEARER_TOKEN")
+        }
+        response = requests.get(url="https://api.sheety.co/59d0cd834a456796b7c66fb3e08a7d9b/flightDeals/users",
+                                headers=headers)
+        data = response.json()["users"]
+        return data

@@ -11,6 +11,7 @@ alert = notification_manager.NotificationManager()
 flight_structure = flight_data.FlightData()
 
 sheety_data = data_manager.DataManager().get_sheet_data()
+users = manager.get_costumer_list()
 
 for row in sheety_data:
     while row["iataCode"] == "":
@@ -33,6 +34,7 @@ for row in sheety_data:
         arrival = cheapest_flight["itineraries"][0]["segments"][-1]["arrival"]["iataCode"]
         price = cheapest_flight["price"]["grandTotal"]
         city = row["city"]
+        alert.send_email(users=users, price=price, departure_date=departure_date, arrival_date=arrival_date, departure=departure, arrival=arrival, city=city)
         alert.send_notification(price=price, departure_date=departure_date, arrival_date=arrival_date, departure=departure, arrival=arrival, city=city)
     else:
         print("No flight found")
