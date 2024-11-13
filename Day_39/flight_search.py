@@ -1,6 +1,8 @@
 import os
 from dotenv import load_dotenv
 import requests
+from datetime import datetime, timedelta
+
 
 # This class is responsible for talking to the Flight Search API.
 class FlightSearch:
@@ -39,19 +41,22 @@ class FlightSearch:
 
         return token
 
-    def get_flight_offers(self):
+    def get_flight_offers(self, row):
         headers = {
             "Authorization": "Bearer " + self.token
         }
 
+        tomorrow = datetime.now() + timedelta(days=1)
+
         query = {
             "originLocationCode": "TBS",
-            "destinationLocationCode": "FRA",
-            "departureDate": "2025-02-02",
+            "destinationLocationCode": row["iataCode"],
+            "departureDate": tomorrow.strftime("%Y-%m-%d"),
             "adults": 1,
             "max": "10",
-            "maxPrice": "200"
+            "maxPrice": row["lowestPrice"]
         }
 
         response = requests.get(url="https://test.api.amadeus.com/v2/shopping/flight-offers",params=query, headers=headers)
-        print(response.text)
+        data = response.json()
+        return data
