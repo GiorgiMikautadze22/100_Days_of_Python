@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -9,7 +9,7 @@ def make_bold_decorator(function):
 @app.route("/")
 @make_bold_decorator
 def hello_world():
-    return "<p>Hello, World!</p>"
+    return render_template("index.html")
 
 
 if __name__ == "__main__":
