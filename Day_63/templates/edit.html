@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add Book</title>
+    {{ bootstrap.load_css() }}
+    {% from 'bootstrap5/form.html' import render_form %}
+  </head>
+  <body>
+    <h1>{{book.title}}</h1>
+    <h2>{{book.author}}</h2>
+    {{render_form(form, novalidate=True)}}
+  </body>
+</html>
