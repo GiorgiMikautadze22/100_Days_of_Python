@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+{% from 'bootstrap5/form.html' import render_form  %}
+
+<div class="box">
+	<h1>Register</h1>
+    <form action="{{ url_for('register') }}" method="post">
+    	{{render_form(form, novalidate=True)}}
+    </form>
+</div>
+
+{% endblock %}
